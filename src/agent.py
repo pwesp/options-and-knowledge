@@ -1,5 +1,12 @@
 """
 The alien agent: model setup and tool registration.
+
+# @alien.tool_plain registers a function as a tool the LLM can call.
+# "plain" means the function only receives its own parameters — no access to
+# agent internals. The alternative, @alien.tool, passes a RunContext as the
+# first argument for tools that need access to dependencies or run state.
+# pydantic_ai infers the tool's JSON schema directly from the type hints,
+# so the LLM knows exactly what arguments to provide.
 """
 
 from pathlib import Path
@@ -18,9 +25,22 @@ alien: Agent = Agent(
 )
 
 
+# For record_in_encyclopedia, the parameter is typed as EncyclopediaEntry
+# (a Pydantic BaseModel). pydantic_ai expands that model into a JSON schema
+# with three required fields — title, category, content — and sends that
+# schema to the LLM. The LLM never sees Python code; it sees the schema and
+# the docstring below. Those two things are what force the structured output.
 @alien.tool_plain
 def record_in_encyclopedia(entry: EncyclopediaEntry) -> str:
-    """Save a piece of knowledge to the encyclopedia with a title, category, and description."""
+    """
+    Save a piece of knowledge to the encyclopedia with a title, category, and description.
+    
+    For record_in_encyclopedia, the parameter is typed as EncyclopediaEntry
+    a Pydantic BaseModel). pydantic_ai expands that model into a JSON schema
+    with three required fields — title, category, content — and sends that
+    schema to the LLM. The LLM never sees Python code; it sees the schema and
+    the docstring below. Those two things are what force the structured output.
+    """
     return write_entry(entry)
 
 
