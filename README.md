@@ -2,7 +2,7 @@
 
 An alien lands on a foreign planet and tries to learn how to survive — by asking questions, taking notes, and chasing every new thing it encounters.
 
-This is a small, student-friendly demo of Richard Sutton's [OaK architecture](https://www.youtube.com/watch?v=gEbbGyNkR2U) (Options and Knowledge), built with [pydantic_ai](https://ai.pydantic.dev) and [Ollama](https://ollama.com). The alien runs entirely on a local LLM — no API keys needed.
+This is a small, student-friendly demo of Richard Sutton's [OaK architecture](https://www.youtube.com/watch?v=gEbbGyNkR2U) (Options and Knowledge), built with [pydantic_ai](https://ai.pydantic.dev) and [Ollama](https://ollama.com).
 
 ---
 
