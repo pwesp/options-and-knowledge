@@ -15,7 +15,7 @@ from pydantic_ai import Agent
 from pydantic_ai.models.openai import OpenAIChatModel
 from pydantic_ai.providers.ollama import OllamaProvider
 
-from .tools import EncyclopediaEntry, ask, reorganize, write_entry
+from .tools import EncyclopediaEntry, reorganize, write_entry
 
 _system_prompt = (Path(__file__).parent / "prompts" / "system.md").read_text()
 
@@ -50,7 +50,3 @@ def reorganize_encyclopedia(reorganized_content: str) -> str:
     return reorganize(reorganized_content)
 
 
-@alien.tool_plain
-def ask_question(question: str) -> str:
-    """Ask a question and receive an answer. Use this to probe deeper into anything new or surprising."""
-    return ask(question)

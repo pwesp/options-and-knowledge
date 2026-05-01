@@ -2,8 +2,6 @@
 Entry point. Runs the terminal loop: feed the alien observations, let it think and ask questions.
 """
 
-from pydantic_ai.messages import ModelMessage
-
 from src.agent import alien
 from src.tools import KNOWLEDGE_BASE
 
@@ -23,8 +21,6 @@ def build_message(observation: str) -> str:
 def main() -> None:
     print("The alien awakens...\n")
 
-    history: list[ModelMessage] = []
-
     while True:
         try:
             observation = input("\n[World]: ").strip()
@@ -36,12 +32,9 @@ def main() -> None:
             continue
 
         message = build_message(observation)
-        result = alien.run_sync(message, message_history=history)
+        result = alien.run_sync(message)
 
         print(f"\n[Alien]: {result.output}")
-
-        # Accumulate history so the alien remembers the conversation
-        history += result.new_messages()
 
 
 if __name__ == "__main__":
